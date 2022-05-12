@@ -315,5 +315,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		checkPrivnote(s, m)
 	} else if reInviteLink.Match([]byte(m.Content)) && settings.Invite.Enable {
 		handleInviteLink(s, m)
-	}
+	} else if strings.Contains(strings.ToLower(m.Content), "oop") && !m.Author.Bot {
+		// send 'mehf' back to the channel
+		_, _ = s.ChannelMessageSend(m.ChannelID, "mehf")
 }
